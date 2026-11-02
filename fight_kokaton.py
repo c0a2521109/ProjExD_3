@@ -165,6 +165,7 @@ def main():
                     if beam.rct.colliderect(bomb.rct):
                         beams[j] = None
                         bombs[i] = None
+                        bird.change_img(6, screen) # よろこびエフェクト
                         score.score += 1
 
         if bird.rct.colliderect(bomb.rct):
