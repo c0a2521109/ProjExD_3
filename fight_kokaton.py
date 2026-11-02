@@ -152,11 +152,21 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 return
-            # if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
+            if event.type == pg.KEYDOWN and event.key == pg.K_SPACE:
             #     # スペースキー押下でBeamクラスのインスタンス生成
-            #     beam = Beam(bird)            
-        screen.blit(bg_img, [0, 0])
-        
+            #     beam = Beam(bird)
+            
+                screen.blit(bg_img, [0, 0])
+
+        # ビームと爆弾の衝突判定
+        for j, beam in enumerate(beams):
+            for i, bomb in enumerate(bombs):
+                if beam is not None and bomb is not None:
+                    if beam.rct.colliderect(bomb.rct):
+                        beams[j] = None
+                        bombs[i] = None
+                        score.score += 1
+
         if bird.rct.colliderect(bomb.rct):
             # ゲームオーバー時に，こうかとん画像を切り替え，1秒間表示させる
             bird.change_img(8, screen)
